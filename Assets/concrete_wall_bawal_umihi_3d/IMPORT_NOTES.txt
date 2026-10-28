@@ -1,0 +1,19 @@
+OBJ material package
+
+MTL profile: classic. Classic mode deliberately uses a compatibility preview for PBR sources (Ns 250 / Ks 0.5); normal, roughness and metallic images remain sidecars, not active MTL directives. PBR mode enables extended directives instead. This is not an identical-render guarantee.
+
+Load the OBJ with its MTL and textures folder kept together. Legacy highlights use Ns/Ks/illum 2; these are approximate, not a promise of identical lighting across viewers. map_Ns is deliberately not fed raw roughness.
+
+For PBR import: the primary roughness/metallic PNGs already contain their scalar factors, so MTL Pr/Pm are 1 when those maps exist. Do not multiply factors twice. Original packed/source images and original factors are retained in materials.json for precise reconstruction rather than relying on a quantized strength bake. Base color/emission are sRGB; normal/roughness/metallic/AO are linear. Rebuild unsupported AO, light, alpha-cutoff and double-sided settings from the manifest.
+
+Texture UV transforms were baked into export-only UV0 coordinates; texture transforms were reset to identity.
+
+Normal-map strength conventions vary between target importers; non-default normalScale may not be reproduced exactly.
+
+Images were normalized to file-image orientation. PNG/canvas re-encoding, importer material support and color management can still differ; this is not a lossless-PBR guarantee.
+
+OBJ/MTL cannot preserve a full glTF PBR shader, rigs, animation or hierarchy. Classic mode uses a deliberate compatibility preset for PBR sources, not an exact PBR conversion. PBR mode activates map_Pr/map_Pm and norm, which require importer support.
+
+Classic OBJ profile: PBR and normal maps are preserved as sidecars but not bound in the MTL. This avoids mixed classic/PBR shader selection. PBR sources use Ns 250 / Ks 0.5 for a Meshy-like classic preview; source Phong and unlit settings are retained. Select objMaterialMode: pbr for extended materials.
+
+In PBR mode, normal maps use norm, not a fake height/bump-map alias. Configure a consistent tangent basis and normal-map convention in the target app. AO/light maps are sidecars rather than misrepresented as ambient material colors.

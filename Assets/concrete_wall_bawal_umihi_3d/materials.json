@@ -1,0 +1,124 @@
+{
+  "schema": "browser-obj-material-package/1",
+  "mtlProfile": "classic",
+  "units": "meter",
+  "upAxis": "Y",
+  "uvConvention": "source/prepared UVs; file-image rows normalized once",
+  "triangles": 524846,
+  "positionRecords": 288372,
+  "uvRecords": 288372,
+  "normalRecords": 288372,
+  "indexReuse": "input vertex identity only; no coordinate welding",
+  "materials": [
+    {
+      "id": "material_0",
+      "mtlProfile": "classic",
+      "name": "",
+      "baseColorFactorLinear": [
+        1,
+        1,
+        1
+      ],
+      "emissiveFactorLinear": [
+        0,
+        0,
+        0
+      ],
+      "emissiveIntensity": 1,
+      "roughnessFactor": 1,
+      "metalnessFactor": 1,
+      "normalScale": [
+        1,
+        -1
+      ],
+      "opacity": 1,
+      "alphaTest": 0,
+      "transparent": false,
+      "doubleSided": true,
+      "unlit": false,
+      "aoMapIntensity": 1,
+      "bumpScale": 1,
+      "legacyPhong": {
+        "Ns": 250,
+        "Ks": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "effectiveRoughnessAverage": 0.5786839831355379,
+        "effectiveMetalnessAverage": 0.0031073196262418356,
+        "approximation": true,
+        "previewPreset": "classic-compatibility",
+        "sourceDerivedPhong": {
+          "Ns": 15.834631785356379,
+          "Ks": [
+            0.22931644850670602,
+            0.22931644850670602,
+            0.22931644850670602
+          ]
+        }
+      },
+      "maps": {
+        "map": {
+          "file": "textures/material_0_diffuse.png",
+          "activeInMTL": true,
+          "sourceChannel": "rgb",
+          "sourceFactor": 1,
+          "scalarFactorBaked": false,
+          "normalScaleBaked": false,
+          "colorSpace": "sRGB",
+          "uvChannel": 0,
+          "wrapS": 1000,
+          "wrapT": 1000,
+          "minFilter": 1008,
+          "magFilter": 1006
+        },
+        "normalMap": {
+          "file": "textures/material_0_normal.png",
+          "activeInMTL": false,
+          "sourceFile": "textures/source_0.png",
+          "sourceChannel": "rgb",
+          "sourceFactor": 1,
+          "scalarFactorBaked": false,
+          "normalScaleBaked": true,
+          "colorSpace": "linear",
+          "uvChannel": 0,
+          "wrapS": 1000,
+          "wrapT": 1000,
+          "minFilter": 1008,
+          "magFilter": 1006
+        },
+        "roughnessMap": {
+          "file": "textures/material_0_roughness.png",
+          "activeInMTL": false,
+          "sourceFile": "textures/source_1.png",
+          "sourceChannel": "g",
+          "sourceFactor": 1,
+          "scalarFactorBaked": true,
+          "normalScaleBaked": false,
+          "colorSpace": "linear",
+          "uvChannel": 0,
+          "wrapS": 1000,
+          "wrapT": 1000,
+          "minFilter": 1008,
+          "magFilter": 1006
+        },
+        "metalnessMap": {
+          "file": "textures/material_0_metallic.png",
+          "activeInMTL": false,
+          "sourceFile": "textures/source_1.png",
+          "sourceChannel": "b",
+          "sourceFactor": 1,
+          "scalarFactorBaked": true,
+          "normalScaleBaked": false,
+          "colorSpace": "linear",
+          "uvChannel": 0,
+          "wrapS": 1000,
+          "wrapT": 1000,
+          "minFilter": 1008,
+          "magFilter": 1006
+        }
+      }
+    }
+  ]
+}
