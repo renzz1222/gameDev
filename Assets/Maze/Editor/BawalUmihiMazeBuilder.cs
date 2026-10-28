@@ -66,10 +66,19 @@ namespace BawalUmihiMaze.Editor
                 return;
             }
 
+            // On a fresh git clone (no UserSettings/), Unity opens an unsaved empty "Untitled" scene.
+            // Automatically open Assets/Scenes/SampleScene.unity if it exists!
+            Scene currentScene = SceneManager.GetActiveScene();
+            if (string.IsNullOrEmpty(currentScene.path) && !currentScene.isDirty && File.Exists("Assets/Scenes/SampleScene.unity"))
+            {
+                EditorSceneManager.OpenScene("Assets/Scenes/SampleScene.unity");
+            }
+
             MazeMetadata existingMeta = UnityEngine.Object.FindFirstObjectByType<MazeMetadata>();
             if (existingMeta != null || GameObject.Find("MazeRoot") != null)
             {
                 SessionState.SetBool(AutoBuildSessionKey, true);
+                RepairPrefabMeshesIfNeeded();
 
                 bool missingPlayer = UnityEngine.Object.FindFirstObjectByType<PlayerCubeController>() == null;
                 bool missingTimer = UnityEngine.Object.FindFirstObjectByType<MazeTimerUI>() == null;
@@ -695,6 +704,31 @@ namespace BawalUmihiMaze.Editor
                     EditorSceneManager.SaveScene(activeScene);
                 }
                 Debug.Log("[BawalUmihiMaze] Added looping atmospheric BackgroundMusic to scene.");
+            }
+        }
+
+        private static void RepairPrefabMeshesIfNeeded()
+        {
+            RepairSingleWallPrefab($"{PrefabsFolder}/MazeWall_Extension.prefab", ExtObjPath);
+            RepairSingleWallPrefab($"{PrefabsFolder}/MazeWall_BawalUmihi_DeadEnd.prefab", BawalObjPath);
+        }
+
+        private static void RepairSingleWallPrefab(string prefabPath, string objPath)
+        {
+            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+            if (prefab == null) return;
+            Transform lod0 = prefab.transform.Find("Mesh_LOD0");
+            if (lod0 == null) return;
+            MeshFilter mf = lod0.GetComponent<MeshFilter>();
+            if (mf != null && mf.sharedMesh == null)
+            {
+                Mesh loaded = LoadMeshFromModel(objPath);
+                if (loaded != null)
+                {
+                    mf.sharedMesh = loaded;
+                    EditorUtility.SetDirty(prefab);
+                    AssetDatabase.SaveAssets();
+                }
             }
         }
 

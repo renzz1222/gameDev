@@ -1,5 +1,5 @@
-# Git LFS for large 3D / binary source assets (>50 MB models, etc.)
-*.obj filter=lfs diff=lfs merge=lfs -text
+# Store .obj directly in Git (both models are <100 MiB) so clones/ZIPs work without Git LFS
+*.obj binary
 *.fbx filter=lfs diff=lfs merge=lfs -text
 *.blend filter=lfs diff=lfs merge=lfs -text
 *.psd filter=lfs diff=lfs merge=lfs -text
